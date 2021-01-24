@@ -63,6 +63,25 @@ def newdata():
     
 def msg():
     messagebox.showinfo("showinfo", "Record has been save")
+
+def present():
+    messagebox.showinfo("showinfo", "Record is already there")
+    delete()
+
+def Check():
+    roll = e2.get()
+    tree1={}
+    with open(r'students.json','r') as f:
+        tree1=json.load(f)
+        
+        x=len(tree1["students"])
+        
+        for i in range(0,x):
+            if roll == tree1['students'][i]['RollNo']:
+                present()
+                break
+        else:
+            save()
     
     
 root = Tk()
@@ -123,9 +142,10 @@ c = ttk.Checkbutton(tab1, text='Click if you need Hostel Facility', variable=v1)
 c.place(x=770, y=240)
 
 
-btn1 = ttk.Button(tab1, text='Save', width=15, command=save)
+btn1 = ttk.Button(tab1, text='Save', width=15, command=Check)
 btn1.place(x=300, y=320)
 ttk.Button(tab1, text='Clear', width=15, command=delete).place(x=450, y=320)
+
 
 
 
@@ -172,3 +192,5 @@ if os.path.isfile("students.json"):
 
 
 root.mainloop()
+
+      
